@@ -1,12 +1,23 @@
 import React from "react";
+import styled from 'styled-components'
 import Slider from "react-slick";
-import { getposters, getfilmdata, updatecount, getnext, getlast} from '../actions/card'
+import { getposters, getfilmdata, updatecount, getnext, getlast, logon} from '../actions/card'
 import { connect } from 'react-redux'
 
+const CHK = styled.img`
+  left: 103px;
+  position: absolute;
+  width: 50px;
+`;
+
 class Left extends React.Component {
+  constructor(props) {
+    super()
+    this.state = {checkIt: 1}
+    this.imageClick = this.imageClick.bind(this);
+  }
   componentDidMount(){
-    this.props.getposters(0)
-    this.props.getfilmdata()
+    this.props.getposters()
   }
   next = () => {
     if (this.props.count === 2) {
@@ -32,13 +43,20 @@ class Left extends React.Component {
       this.props.updatecount(this.props.count - 1)
     }
   }
-  imageClick = (n) => {
-    this.props.getfilmdata(n, 0)
+  imageClick = (n, numbb, code) => {
+    this.props.getfilmdata(code)
+    this.props.logon(0)
+    this.setState(state => ({
+      checkIt: n
+    }))
   }
   render() {
     const { posters } = this.props
     const { numbs } = this.props
     let course = 0
+    let check = <CHK 
+      src={"http://kshisa.ru/images/bill/check.png"}  
+    />
     function SampleNextArrow(props) {
       const { className, style, onClick } = props;
       return (
@@ -86,13 +104,13 @@ class Left extends React.Component {
       prevArrow: <SamplePrevArrow />
     };
     return (
-      
       <div style={{
             width: "170px"
           }}>
         <Slider {...settings}>
         {posters.map(poster => (
           <div id ="posters">
+           {this.state.checkIt === poster[0] ? check : ""}
             <input 
               type="hidden" 
               name={'id' + poster[0]} 
@@ -100,10 +118,11 @@ class Left extends React.Component {
             />
             <img
               className="image"
-              src={'http://kshisa.ru/images/mini/' + poster[1] +  'm0.jpg'}
+              src={'http://kshisa.ru/images/images/' + poster[1] +  'p2.jpg'}
               alt={numbs}
-              onClick={() => this.imageClick(poster[0])}
+              onClick={() => this.imageClick(poster[0], 8, poster[1])}
             />
+            
           </div>
         ))}
         </Slider>
@@ -112,9 +131,9 @@ class Left extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  numbs :  state.post.numbs,
+  numbs:   state.post.numbs,
   posters: state.post.posters,
-  count: state.post.count,
+  count:   state.post.count,
   trigger: state.post.trigger
 })
-export default connect(mapStateToProps, { getposters, getfilmdata, updatecount, getnext, getlast })(Left)
+export default connect(mapStateToProps, { getposters, getfilmdata, updatecount, getnext, getlast, logon })(Left)

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 class Find extends React.Component{
   imageClick = (n) => {
-    this.props.getfilmdata(n, 0)
+    this.props.getfilmdata(n)
   }
   render(){
     const { find } = this.props
@@ -45,12 +45,12 @@ class Find extends React.Component{
           <Slider {...settings}>
           {find.map(poster => (
             <div id ="crew">
-              <div style={{ color: "black"} }>{poster[3]}</div>
+              <div style={{color: "black"} }>{poster[0]}</div>
               <img
                 className="image"
-                src={'http://kshisa.ru/images/mini/' + poster[1] + 'm0.jpg'}
+                src={'http://kshisa.ru/images/images/' + poster[1] + 'p2.jpg'}
                 alt= ''
-                onClick={() => this.imageClick(poster[0])}
+                onClick={() => this.imageClick(poster[1])}
               />
               <div style={{ color: "black"} }>{poster[2]}</div>
             </div>

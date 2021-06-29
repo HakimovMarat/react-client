@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
+import React from "react"
 import { connect } from 'react-redux'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Line = styled.div`
     background: url(http://kshisa.ru/images/bill/clock.png) no-repeat;
     color: azure;
     float: right;
-    border: 1px solid azure;
     width: 28%;
     margin-right: 44px;
+    height: 68px;
 `;
 const H4 = styled.h4`
   font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
-  padding-left: 18px;
+  padding-left: 27px;
   color: azure;
   margin: 1px;
   float: left;
@@ -21,9 +21,9 @@ const H4 = styled.h4`
 `;
 class Clock extends React.Component {
     constructor(props) {
-      super(props);
+      super()
       this.state = {date0: new Date(),
-                    date1: new Date()};
+                    date1: new Date()}
     }
     componentDidMount() {
       this.timerID = setInterval(

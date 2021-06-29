@@ -1,10 +1,23 @@
 import React from "react";
 import Slider from "react-slick";
 import { connect } from 'react-redux'
+import {newUser} from '../actions/card'
 
 class Crew extends React.Component{
   render(){
+    let row, path
     const { crew } = this.props
+    const { login } = this.props
+    const { avat } = this.props
+
+    if (login === 0) {
+      row = crew
+      path = 'images/'
+    }
+    else if (login === 2) {
+      row = avat
+      path = 'avat/'
+    }
     function SampleNextArrow(props) {
       const { className, style, onClick } = props;
       return (
@@ -39,12 +52,13 @@ class Crew extends React.Component{
     return (
         <div>
           <Slider {...settings}>
-          {crew.map(poster => (
+          {row.map(poster => (
             <div id ="crew">
-              <div style={{ color: "black"} }>{poster[0]}</div>
-              <img
+              <div style={{ color: "black"}}>{poster[0]}</div>
+              <input
+                type = "image"
                 className="image"
-                src={'http://kshisa.ru/images/crew/' + poster[1] + '.jpg'}
+                src={'http://kshisa.ru/images/'+ path + poster[1] + '.jpg'}
                 alt= ''
               />
               <div style={{ color: "black"} }>{poster[2]}</div>
@@ -56,6 +70,10 @@ class Crew extends React.Component{
   }
 }
 const mapStateToProps = (state) => ({
-  crew: state.post.crew
+  crew: state.post.crew,
+  login: state.post.login,
+  avat: state.post.avat,
+  name: state.post.name,
+  email: state.post.email
 })
-export default connect(mapStateToProps)(Crew)
+export default connect(mapStateToProps, {newUser})(Crew)

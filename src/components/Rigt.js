@@ -1,16 +1,27 @@
 import React from "react";
+import styled from 'styled-components'
 import Slider from "react-slick";
-import {getposters, getfilmdata, updatecountr, getnextr, getlastr} from '../actions/card'
+import {getposters, getfilmdata, updatecountr, getnextr, getlastr, logon} from '../actions/card'
 import { connect } from 'react-redux'
 
+const CHK = styled.img`
+  left: 103px;
+  position: absolute;
+  width: 50px;
+`;
+
 class Rigt extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {checkIt: ''}
+    this.imageClick = this.imageClick.bind(this);
+  }
   componentDidMount(){
     this.props.getposters()
-    this.props.getfilmdata()
   }
   next = () => {
     if (this.props.countr === 2) {
-      this.props.getnextr(this.props.triggerr, this.props.animate, this.props.numba, 4)
+      this.props.getnextr(this.props.triggerr, this.props.animate, this.props.numba, 1)
       this.props.updatecountr(this.props.countr + 1)
     }
     else if (this.props.countr === 5) {
@@ -22,7 +33,7 @@ class Rigt extends React.Component {
   }
   last = () => {
     if (this.props.countr === 3) {
-      this.props.getlastr(this.props.triggerr, this.props.animate, this.props.numba, 4)
+      this.props.getlastr(this.props.triggerr, this.props.animate, this.props.numba, 1)
       this.props.updatecountr(this.props.countr - 1)
     }
     else if (this.props.countr === 1) {
@@ -32,13 +43,19 @@ class Rigt extends React.Component {
       this.props.updatecountr(this.props.countr - 1)
     }
   }
-  imageClick = (n) => {
-    this.props.getfilmdata(n, 4)
+  imageClick = (n, numbb, code) => {
+    this.props.getfilmdata(code)
+    this.props.logon(0)
+    this.setState(state => ({
+      checkIt: n
+    }))
   }
   render() {
     const { animate } = this.props
     const { numba } = this.props
-
+    let check = <CHK 
+      src={"http://kshisa.ru/images/bill/check.png"}  
+    />
     let course = 0
     function SampleNextArrow(props) {
       const { className, style, onClick } = props;
@@ -93,6 +110,7 @@ class Rigt extends React.Component {
         <Slider {...settings}>
         {animate.map(poster => (
           <div id ="posters">
+          {this.state.checkIt === poster[0] ? check : ""}
             <input 
               type="hidden" 
               name={'id' + poster[0]} 
@@ -100,9 +118,9 @@ class Rigt extends React.Component {
             />
             <img
               className="image"
-              src={'http://kshisa.ru/images/mini/' + poster[1] +  'm0.jpg'}
+              src={'http://kshisa.ru/images/images/' + poster[1] +  'p2.jpg'}
               alt={numba}
-              onClick={() => this.imageClick(poster[0])}
+              onClick={() => this.imageClick(poster[0], 8, poster[1])}
             />
           </div>
         ))}
@@ -118,4 +136,4 @@ const mapStateToProps = (state) => ({
   countr:  state.post.countr,
   triggerr: state.post.triggerr
 })
-export default connect(mapStateToProps, {getposters, getfilmdata, updatecountr, getnextr, getlastr})(Rigt)
+export default connect(mapStateToProps, {getposters, getfilmdata, updatecountr, getnextr, getlastr, logon})(Rigt)

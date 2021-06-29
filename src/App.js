@@ -6,10 +6,8 @@ import './App.css';
 import { Provider } from 'react-redux'
 import styled from 'styled-components';
 import store from './store'
-import Head from './components/Head';
 
 const MAIN = styled.div`
-   
     width: 960px;
     margin-left: auto;
     margin-right: auto;
@@ -43,7 +41,6 @@ render() {
               <Left />
             </LEFT>
             <CENT>
-              <Head />
               <Card />
             </CENT>
             <LEFT>
