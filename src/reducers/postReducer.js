@@ -8,6 +8,7 @@ import {
 const initialState = {
   info: '',
   posters: [],
+  numbs: 0,
   trigger: 0,
   count: 0
 }
@@ -16,7 +17,8 @@ export default function (state = initialState, action) {
     case GET_POSTERS:
       return {
         ...state,
-        posters: action.payload
+        posters: action.payload[1],
+        numbs: action.payload[0]
     }
     case GET_FILMDATA:
       return {
@@ -32,6 +34,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posters: action.payload,
+        numbs:   action.numbs,
         trigger: action.trigger
     }
     default:

@@ -1,30 +1,55 @@
 import React, { Component } from 'react';
-import SimpleSlider from './components/SimpleSlider';
+import Left from './components/Left';
+import Rigt from './components/Rigt';
 import Card from './components/Card';
-import Head from './components/Head';
 import './App.css';
 import { Provider } from 'react-redux'
-import Grid from '@material-ui/core/Grid'
+import styled from 'styled-components';
 import store from './store'
+import Head from './components/Head';
 
+const MAIN = styled.div`
+   
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+`;
+const LEFT = styled.div`
+    width: 16%;
+    height: 1320px;
+    float: left;
+    border-right: 2px;
+    margin-bottom: -15px;
+    text-align: center;
+`;
+const CENT = styled.div`
+    text-align: center;
+    color: #675353;
+    font-weight: 600;
+    font-style: oblique;
+    top: 210px;
+    left: 10%;
+    width: 60%;
+    height: 1320px;
+    float: left;
+    padding: 0 6px 0 6px;
+`;
 class App extends Component {
 render() {
   return (
       <Provider store={store}>
-        <div className="App">
-          <Grid container>
-            <Grid item xs={2}>
-              <SimpleSlider />
-            </Grid>
-            <Grid item xs={7}>
+          <MAIN>
+            <LEFT>
+              <Left />
+            </LEFT>
+            <CENT>
               <Head />
               <Card />
-            </Grid>
-            <Grid item xs={2}>
-              <SimpleSlider />
-            </Grid>
-          </Grid>
-        </div>
+            </CENT>
+            <LEFT>
+              <Rigt />
+            </LEFT>
+          </MAIN>
       </Provider>
     );
   }

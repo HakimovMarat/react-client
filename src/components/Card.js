@@ -5,11 +5,10 @@ import styled from 'styled-components';
 const H1 = styled.h1`
 		color: red;
 		font-size: 16px;
-		`;
+`;
 class Card extends Component {
 	render () {
 		const { info } = this.props
-        
 		return (
 		  <div>
             <H1>{ info[0] }</H1>

@@ -3,20 +3,33 @@ import {
 	GET_FILMDATA,
 	GET_POSTERS,
 	UPD_COUNT,
-	GET_NEXT
+	UPD_COUNTR,
+	UPD_PLAC,
+	GET_NEXT,
+	GET_NEXTR,
+	GET_FIND
 } from '../constants'
 
-export const getposters = () => dispatch => {
-	axios.get('/index/start')
+export const finded =  e => dispatch => {
+	axios.get('/index/find', { params: { find: e } })
 		.then(res => dispatch({
-      type: GET_POSTERS,
+            type: GET_FIND,
+			payload: res.data            
+		}))
+		.catch(err => console.log(err))
+}
+
+export const getposters =  numb => dispatch => {
+	axios.get('/index/start', { params: { file: numb } })
+		.then(res => dispatch({
+            type: GET_POSTERS,
 			payload: res.data
 		}))
 		.catch(err => console.log(err))
 }
 
-export const getfilmdata = postData => dispatch => {
-	axios.get('/index/card', { params: { numb: postData } })
+export const getfilmdata = (numb, file) => dispatch => {
+	axios.get('/index/card', { params: { numb: numb, file: file } })
 		.then(res => dispatch({
             type: GET_FILMDATA,
 			payload: res.data
@@ -31,22 +44,47 @@ export const updatecount = (count) => dispatch => {
 		})
 }
 
-export const getnext = (trigger, posters) => dispatch => {
+export const updateplacard = (count) => dispatch => {
+	dispatch({
+		   type: UPD_PLAC,
+		   placard: count,
+	   })
+}
+
+export const updatecountr = (countr) => dispatch => {
+	dispatch({
+		   type: UPD_COUNTR,
+		   payload: countr
+	   })
+}
+
+export const getnext = (trigger, posters, n, file) => dispatch => {
 	let pg = 'up';
-  axios.get('/index/pgup')
-	   .then (res => dispatch(insert(pg, trigger, posters, res.data)))
+  axios.get('/index/pgup', { params: { hide: n, file: file } })
+	   .then (res => dispatch(insert(pg, trigger, posters, res.data, GET_NEXT)))
 }
 
-export const getlast = (trigger, posters) => dispatch => {
+export const getlast = (trigger, posters, n, file) => dispatch => {
 	let pg = 'dn';
-	axios.get('/index/pgdn')
-		 .then (res => dispatch(insert(pg, trigger, posters, res.data)))
+	axios.get('/index/pgdn', { params: { hide: n, file: file} })
+		 .then (res => dispatch(insert(pg, trigger, posters, res.data, GET_NEXT)))
 }
 
-export const insert = (pg, trigger, posters, data)  => {
+export const getnextr = (triggerr, animate, n, file) => dispatch => {
+	let pg = 'up';
+    axios.get('/index/pgup', { params: { hide: n, file: file } })
+	   .then (res => dispatch(insert(pg, triggerr, animate, res.data, GET_NEXTR)))
+}
+
+export const getlastr = (triggerr, animate, n, file) => dispatch => {
+	let pg = 'dn';
+	axios.get('/index/pgdn', { params: { hide: n, file: file } })
+		 .then (res => dispatch(insert(pg, triggerr, animate, res.data, GET_NEXTR)))
+}
+const insert = (pg, trigger, posters, data, type)  => {
 	let cut
 	if (pg === 'up'){
-	  if (trigger === 0){
+	  if (trigger === 0) {
 		  cut = 10
 		  trigger = 1
 	  }
@@ -60,7 +98,7 @@ export const insert = (pg, trigger, posters, data)  => {
 	  }
   }
 	else if (pg === 'dn'){
-		if (trigger === 0){
+		if (trigger === 0) {
 			cut = 5
 			trigger = 2
 		}
@@ -73,12 +111,17 @@ export const insert = (pg, trigger, posters, data)  => {
 			trigger = 0
 		}
 	}
-	posters.splice(cut, 5, [data[0][0], data[0][1]], [data[1][0], data[1][1]],
-											   [data[2][0], data[2][1]], [data[3][0], data[3][1]],
-												 [data[4][0], data[4][1]])
+	posters.splice(cut, 5, [data[1][0][0], data[1][0][1]],
+		                   [data[1][1][0], data[1][1][1]],
+						   [data[1][2][0], data[1][2][1]],
+						   [data[1][3][0], data[1][3][1]],
+						   [data[1][4][0], data[1][4][1]]
+					)
 	return {
-		  type: GET_NEXT,
-		  payload: posters,
-		  trigger: trigger
-	 }
+		type: type,
+		payload: posters,
+		numbs: data[0][0],
+		trigger: trigger
+	}
+
 }
