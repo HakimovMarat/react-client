@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
 	GET_FILMDATA,
+	GET_BLANK,
 	GET_POSTERS,
 	UPD_COUNT,
 	UPD_COUNTR,
@@ -11,11 +12,52 @@ import {
 	LOGIN,
 	LOGON,
 	GET_USER,
-	NEW_USER,
 	NAME,
-	EMAIL
+	EMAIL,
+	GET_PERSON
 } from '../constants'
 
+export const start = (logon, login) => dispatch => {
+	dispatch({
+	    type:  LOGON,
+	    logon: logon,
+		login: login
+	})
+}
+  
+export const password = (pass) => dispatch => {
+	axios.get('/index/pass', { params: { pass: pass} })
+		.then(res => dispatch({
+			type: GET_USER,
+			user:  res.data[0],
+			post:  res.data[1],
+			code:  res.data[2][0],
+			card:  res.data[2],
+			blank: res.data[3],
+			love:  res.data[4],
+			rank:  '100.jpg'
+		}))
+		.catch(err => console.log(err))
+}
+
+export const getfilmdata = (code) => dispatch => {
+	axios.get('/index/card', { params: { code: code } })
+		.then(res => dispatch({
+			type: GET_FILMDATA,
+			card: res.data
+		}))
+		.catch(err => console.log(err))
+}
+
+export const ava = () => dispatch => {
+    axios.get('/index/avat')
+       .then(res => dispatch({
+		    type: LOGIN,
+			payload: res.data
+        }))
+        .catch(err => console.log(err))
+}
+ 
 export const finded =  e => dispatch => {
 	axios.get('/index/find', { params: { find: e } })
 		.then(res => dispatch({
@@ -36,24 +78,14 @@ export const getposters = () => dispatch => {
 		.catch(err => console.log(err))
 }
 
-export const getfilmdata = (code) => dispatch => {
-	axios.get('/index/card', { params: { code: code } })
+export const putUserLove = (love, user) => dispatch => {
+	axios.get('/index/love', { params: { love: love,
+	                                     user: user} })
 		.then(res => dispatch({
-			type: GET_FILMDATA,
-			card: res.data
-		}))
-		.catch(err => console.log(err))
-}
-
-export const password = (pass) => dispatch => {
-	axios.get('/index/pass', { params: { pass: pass} })
-		.then(res => dispatch({
-			type: GET_USER,
-			numb: res.data[0],
-			foto: res.data[1],
-			code: res.data[2],
-			card: res.data[3],
-			blank: res.data[4]
+			type: GET_BLANK,
+			blank: res.data[0],
+			usern: res.data[1],
+			prope: res.data[2]
 		}))
 		.catch(err => console.log(err))
 }
@@ -63,21 +95,17 @@ export const newUser = (name, mail, avat) => dispatch => {
 		                                mail: mail,
 		                                avat: avat }})
 		.then(res => dispatch({
-            type: NEW_USER,
-			payload: res.data
+			type: GET_USER,
+			user:  res.data[0],
+			code:  res.data[1],
+			card:  res.data[2],
+			blank: res.data[3],
+			love:  res.data[4]
 		}))
 		.catch(err => console.log(err))
 }
 
-export const ava = () => dispatch => {
-    axios.get('/index/avat')
-       .then(res => dispatch({
-		    type: LOGIN,
-			payload: res.data
-        }))
-        .catch(err => console.log(err))
-}
- 
+
 export const logon = (count) => dispatch => {
   dispatch({
     type: LOGON,
@@ -97,6 +125,19 @@ export const email = (email) => dispatch => {
 		   type: EMAIL,
 		   payload: email
 	   })
+}
+
+export const getperson = (code) => dispatch => {
+	axios.get('/index/pers', { params: { code: code } })
+	.then(res => dispatch({
+		type: GET_PERSON,
+		code: code,
+		year1: res.data[0],
+		year2: res.data[1],
+		name1: res.data[2],
+		post:  res.data[3],
+	}))
+	.catch(err => console.log(err))
 }
 
 export const updatecount = (count) => dispatch => {

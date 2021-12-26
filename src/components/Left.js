@@ -16,9 +16,6 @@ class Left extends React.Component {
     this.state = {checkIt: 1}
     this.imageClick = this.imageClick.bind(this);
   }
-  componentDidMount(){
-    this.props.getposters()
-  }
   next = () => {
     if (this.props.count === 2) {
       this.props.getnext(this.props.trigger, this.props.posters, this.props.numbs, 0)
@@ -43,19 +40,18 @@ class Left extends React.Component {
       this.props.updatecount(this.props.count - 1)
     }
   }
-  imageClick = (n, numbb, code) => {
+  imageClick = (n, code) => {
     this.props.getfilmdata(code)
-    this.props.logon(0)
     this.setState(state => ({
       checkIt: n
     }))
   }
   render() {
-    const { posters } = this.props
+    const { post } = this.props
     const { numbs } = this.props
     let course = 0
     let check = <CHK 
-      src={"http://kshisa.ru/images/bill/check.png"}  
+      src={"http://kshisa.ru/images/0/check.png"}  
     />
     function SampleNextArrow(props) {
       const { className, style, onClick } = props;
@@ -64,7 +60,7 @@ class Left extends React.Component {
           className={className}
           style={{ ...style, display: "block", width: "30px", height: "30px", right: "-5px", zIndex:"1"}}
           onClick={onClick}
-          src={"http://kshisa.ru/images/butt/up.png"}
+          src={"http://kshisa.ru/images/0/up.png"}
           alt="up"
         />
       );
@@ -77,14 +73,14 @@ class Left extends React.Component {
           className={className}
           style={{ ...style, display: "block", width: "30px", height: "30px", left: "-5px", zIndex:"1"}}
           onClick={onClick}
-          src={"http://kshisa.ru/images/butt/dn.png"}
+          src={"http://kshisa.ru/images/0/dn.png"}
           alt="dn"
         />
       );
     }
     var settings = {
       infinite: true,
-      slidesToShow: 5,
+      slidesToShow: 4,
       vertical: true,
       beforeChange: (current, next) => {
 		    if (next === 0 && current === 14)  { next = 15 }
@@ -108,7 +104,7 @@ class Left extends React.Component {
             width: "170px"
           }}>
         <Slider {...settings}>
-        {posters.map(poster => (
+        {post.map(poster => (
           <div id ="posters">
            {this.state.checkIt === poster[0] ? check : ""}
             <input 
@@ -118,9 +114,9 @@ class Left extends React.Component {
             />
             <img
               className="image"
-              src={'http://kshisa.ru/images/images/' + poster[1] +  'p2.jpg'}
-              alt={numbs}
-              onClick={() => this.imageClick(poster[0], 8, poster[1])}
+              src={'http://kshisa.ru/images/' + poster[2] + '/' + poster[1] +  poster[3]}
+              alt= ''
+              onClick={() => this.imageClick(poster[0], poster[1])}
             />
             
           </div>
@@ -132,7 +128,7 @@ class Left extends React.Component {
 }
 const mapStateToProps = (state) => ({
   numbs:   state.post.numbs,
-  posters: state.post.posters,
+  post:    state.post.post,
   count:   state.post.count,
   trigger: state.post.trigger
 })

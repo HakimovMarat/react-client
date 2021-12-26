@@ -12,12 +12,9 @@ const CHK = styled.img`
 
 class Rigt extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {checkIt: ''}
+    super()
+    this.state = {checkIt: 0}
     this.imageClick = this.imageClick.bind(this);
-  }
-  componentDidMount(){
-    this.props.getposters()
   }
   next = () => {
     if (this.props.countr === 2) {
@@ -43,9 +40,8 @@ class Rigt extends React.Component {
       this.props.updatecountr(this.props.countr - 1)
     }
   }
-  imageClick = (n, numbb, code) => {
+  imageClick = (n, code) => {
     this.props.getfilmdata(code)
-    this.props.logon(0)
     this.setState(state => ({
       checkIt: n
     }))
@@ -53,9 +49,7 @@ class Rigt extends React.Component {
   render() {
     const { animate } = this.props
     const { numba } = this.props
-    let check = <CHK 
-      src={"http://kshisa.ru/images/bill/check.png"}  
-    />
+    const check = <CHK src={"http://kshisa.ru/images/0/check.png"}  />
     let course = 0
     function SampleNextArrow(props) {
       const { className, style, onClick } = props;
@@ -64,7 +58,7 @@ class Rigt extends React.Component {
           className={className}
           style={{ ...style, display: "block", width: "30px", height: "30px", right: "-5px", zIndex:"1"}}
           onClick={onClick}
-          src={"http://kshisa.ru/images/butt/up.png"}
+          src={"http://kshisa.ru/images/0/up.png"}
           alt="up"
         />
       );
@@ -77,14 +71,14 @@ class Rigt extends React.Component {
           className={className}
           style={{ ...style, display: "block", width: "30px", height: "30px", left: "-5px", zIndex:"1"}}
           onClick={onClick}
-          src={"http://kshisa.ru/images/butt/dn.png"}
+          src={"http://kshisa.ru/images/0/dn.png"}
           alt="dn"
         />
       );
     }
     var settings = {
       infinite: true,
-      slidesToShow: 5,
+      slidesToShow: 4,
       vertical: true,
       beforeChange: (current, next) => {
 		    if (next === 0 && current === 14)  { next = 15 }
@@ -117,10 +111,10 @@ class Rigt extends React.Component {
               value={poster[0]}
             />
             <img
-              className="image"
-              src={'http://kshisa.ru/images/images/' + poster[1] +  'p2.jpg'}
-              alt={numba}
-              onClick={() => this.imageClick(poster[0], 8, poster[1])}
+              className = "image"
+              src = {'http://kshisa.ru/images/' + poster[2] + '/' + poster[1] +  poster[3]}
+              alt = ''
+              onClick = {() => this.imageClick(poster[0], poster[1])}
             />
           </div>
         ))}

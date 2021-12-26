@@ -1,13 +1,11 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 #cent {
-  background: url(http://kshisa.ru/images/bill/gorinoch.png) no-repeat;
-  background-size: 100% 100%;
   font-family: "Sans MS", Verdana, Arial, Helvetica, sans-serif;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  height: 800px;
+  height: 1000px;
 }
 .image {
   height: 120px;
@@ -21,74 +19,62 @@
 }
 #posters {
   height: 140px;
-  background: url(http://kshisa.ru/images/butt/film.png) no-repeat;
+  background: url(http://kshisa.ru/images/0/film.png) no-repeat;
+}
+#posters1 {
+  height: 140px;
+  background: url(http://kshisa.ru/images/0/film.png) no-repeat;
+  width: 104%;
 }
 .Rating { 
   font-size: 20px; 
 }
 .head {
-  height: 60px;
 }
 .Icon {
-  position: relative;
-  width: 70px;
-  height: 70px;
-  background: url(http://icon-icons.com/icons2/72/279581_msg2.png) no-repeat;
-  background-size: 180px 180px;
-  margin: auto;
-  z-index: 3;
-  -webkit-box-shadow: 0 0 0 10px rgba(255,255,255,.2), 0 0 25px 2px rgba(0,0,0,.4), inset 0 0 0 15px rgba(255,255,155,.4);
-  -moz-box-shadow: 0 0 0 10px rgba(255,255,255,.2), 0 0 25px 2px rgba(0,0,0,.4), inset 0 0 0 15px rgba(255,255,155,.4);
-  box-shadow: 0 0 0 10px rgba(255,255,255,.2), 0 0 25px 2px rgba(0,0,0,.4), inset 0 0 0 15px rgba(255,255,155,.4);
-  -webkit-border-radius: 999px;
-  -moz-border-radius: 999px;
-  border-radius: 999px;
+    position: absolute;
+    width: 67px;
+    height: 67px;
+    margin: auto;
+    z-index: 3;
+    box-shadow: 0 0 0 10px rgb(255 255 255 / 20%), 0 0 25px 2px rgb(0 0 0 / 40%), inset 0 0 0 15px rgb(255 255 155 / 40%);
+    border-radius: 999px;
+    top: 25px;
 }
 .Puls1 {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  margin: auto;
-  z-index: 1;
-  opacity: 0;
-  border: 3px solid rgba(255,255,255,.1);
-  -webkit-animation: pulsejg1 4s linear infinite;
-  -moz-animation: pulsejg1 4s linear infinite;
-  animation: pulsejg1 4s linear infinite;
-  -webkit-border-radius: 999px;
-  -moz-border-radius: 999px;
-  border-radius: 999px;
-  -webkit-box-shadow: inset 0px 0px 15px 10px rgba(0, 0, 0, .6);
-  -moz-box-shadow: inset 0px 0px 15px 10px rgba(0, 0, 0, .6);
-  box-shadow: inset 0px 0px 15px 10px rgba(0, 0, 0, .6);
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    position: absolute;
+    width: 67px;
+    height: 67px;
+    margin: auto;
+    z-index: 1;
+    opacity: 0;
+    border: 3px solid rgba(255,255,255,.1);
+    -webkit-animation: pulsejg1 4s linear infinite;
+    animation: pulsejg1 4s linear infinite;
+    border-radius: 999px;
+    box-shadow: inset 0px 0px 15px 10px rgb(0 0 0 / 60%);
+    box-sizing: border-box;
+    top: 25px;
 }
 .Puls2 {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  margin: auto;
-  z-index: 2;
-  opacity: 0;
-  border: 1px solid rgba(255,255,255,0);
-  -webkit-animation: pulsejg2 4s linear infinite;
-  -moz-animation: pulsejg2 4s linear infinite;
-  animation: pulsejg2 4s linear infinite;
-  -webkit-border-radius: 999px;
-  -moz-border-radius: 999px;
-  border-radius: 999px;
-  -webkit-box-shadow: inset 0px 0px 12px 5px rgba(255, 255, 255, .8);
-  -moz-box-shadow: inset 0px 0px 12px 5px rgba(255, 255, 255, .8);
-  box-shadow: inset 0px 0px 12px 5px rgba(255, 255, 255, .8);
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    position: absolute;
+    width: 67px;
+    height: 67px;
+    margin: auto;
+    z-index: 2;
+    opacity: 0;
+    border: 1px solid rgba(255,255,255,0);
+    -webkit-animation: pulsejg2 4s linear infinite;
+    animation: pulsejg2 4s linear infinite;
+    border-radius: 999px;
+    box-shadow: inset 0px 0px 12px 5px rgb(255 255 255 / 80%);
+    box-sizing: border-box;
+    top: 25px;
 }
-.Avat {
-    margin: 2px 23px;
-    float: left;
+.Avat1 {
+}
+.Avat2 {
+    margin: 0 24px 3px 523px;
 }
 @-webkit-keyframes pulsejg1 {
   0% {

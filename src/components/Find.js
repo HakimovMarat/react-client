@@ -16,7 +16,7 @@ class Find extends React.Component{
           className={className}
           style={{ ...style, display: "block", width: "30px", height: "30px",  right: "-53px", zIndex:"1"}}
           onClick={onClick}
-          src={"http://kshisa.ru/images/butt/rt.png"}
+          src={"http://kshisa.ru/images/0/rt.png"}
           alt="up"
         />
       );
@@ -29,7 +29,7 @@ class Find extends React.Component{
           className={className}
           style={{ ...style, display: "block", width: "30px", height: "30px", left: "-53px", zIndex:"1"}}
           onClick={onClick}
-          src={"http://kshisa.ru/images/butt/lt.png"}
+          src={"http://kshisa.ru/images/0/lt.png"}
           alt="down"
         />
       );
@@ -48,7 +48,7 @@ class Find extends React.Component{
               <div style={{color: "black"} }>{poster[0]}</div>
               <img
                 className="image"
-                src={'http://kshisa.ru/images/images/' + poster[1] + 'p2.jpg'}
+                src={'http://kshisa.ru/images/'+ poster[3] + '/' + poster[1] + poster[4]}
                 alt= ''
                 onClick={() => this.imageClick(poster[1])}
               />

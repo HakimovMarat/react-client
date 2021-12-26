@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 const Line = styled.div`
-    background: url(http://kshisa.ru/images/bill/clock.png) no-repeat;
+    background: url(http://kshisa.ru/images/0/clock.png) no-repeat;
     color: azure;
     float: right;
     width: 28%;
